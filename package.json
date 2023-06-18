@@ -10,11 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.6.4"
+    "@astrojs/tailwind": "^3.1.3",
+    "astro": "^2.6.4",
+    "firebase": "^9.22.2",
+    "firebase-admin": "^11.9.0",
+    "tailwindcss": "^3.3.2"
   },
   "description": "``` npm create astro@latest -- --template basics ```",
   "main": "index.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"

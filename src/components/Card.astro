@@ -1,63 +1,47 @@
 ---
-export interface Props {
-	title: string;
-	body: string;
-	href: string;
-}
-
-const { href, title, body } = Astro.props;
+const { title, type } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
-<style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 0.25rem;
-		background-color: white;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 0.6rem;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-	}
+<form id={type} class="module text-white pointer-events-none bg-slate-400 opacity-0 fixed top-1/2 left-1/2 transition-all -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-start w-56 rounded-md p-5 h-56 text-left">
+    <h1 class="text-lg font-bold">{title}</h1>
 
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: 1rem 1.3rem;
-		border-radius: 0.35rem;
-		color: #111;
-		background-color: white;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-		color: #444;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent));
-	}
+    <svg  data-target=`${type}` xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="modal-close absolute right-5 top-6 w-5 h-5 cursor-pointer">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+      
+    <input class="w-full p-2 rounded-sm" placeholder="E-mail" type="email" name="" id=`${type}-firebase-email`>
+    <input class="w-full p-2 rounded-sm" placeholder="Password" type="password" name="" id=`${type}-firebase-password`>
+    <button type="submit" class="py-2 px-4 border-2 border-s-stale-300 rounded-md">Button</button>
+</form>
+
+<style is:inline >
+    .show {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    input {color: slategrey;
+        outline: none;
+    }
+
+    .modal {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
 </style>
+
+<script>
+
+    document.querySelectorAll(".firebase-btn").forEach( (btn) => {
+        btn.addEventListener("click", () => {
+            document.getElementById(btn.getAttribute("data-target")).classList.add("show")
+        })
+    })
+
+    document.querySelectorAll(".modal-close").forEach( (btn) => {
+        btn.addEventListener("click", () => {
+            document.getElementById(btn.getAttribute("data-target")).classList.remove("show")
+        })
+    })
+
+</script>
