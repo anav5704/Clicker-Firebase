@@ -1,9 +1,17 @@
-console.log("Firebase Auth 🤓")
+console.log("Firebase Auth 🔑")
 
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { app } from "../firebase/client";
 
 const auth = getAuth(app);
+auth.onAuthStateChanged( (user) => {
+    if(user) {
+        console.log("User Logged Iin", user)
+    }
+    else {
+        console.log("User Logged Out")
+    }
+})
 
 const signupForm = document.querySelector("#signup")
 signupForm.addEventListener("submit", (e) => {
@@ -17,10 +25,6 @@ signupForm.addEventListener("submit", (e) => {
     // create user
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log("User Account Created")
-        console.log(user)
 
         signupForm.classList.remove("show")
         signupForm.reset();
@@ -32,9 +36,7 @@ signupForm.addEventListener("submit", (e) => {
     
 logOutBtn.addEventListener("click",(e) => {
     e.preventDefault();
-    auth.signOut().then(() => {
-        console.log("User Signed Out")
-    })
+    auth.signOut()
 })
 
 const loginForm = document.querySelector("#login")
@@ -42,13 +44,9 @@ loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = loginForm['login-firebase-email'].value;
     const password = loginForm['login-firebase-password'].value;
-    console.log(email, password)
 
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {            
-        const user = userCredential.user;
-        console.log("User Logged In")
-        console.log(user)
 
         loginForm.classList.remove("show")
         loginForm.reset();
