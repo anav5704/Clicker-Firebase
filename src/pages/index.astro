@@ -1,10 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-const auth = getAuth(app);
-import { app } from "../firebase/server";
-import { getAuth } from "firebase-admin/auth";
-
 ---
 
 <Layout title="Clicker">
@@ -19,13 +15,13 @@ import { getAuth } from "firebase-admin/auth";
             </div>
         </nav>
 
+    <div class="p-5 gap-5 grid grid-cols-3">
         <Card title="Log In" type="login" />
         <Card title="Sign Up"  type="signup" />
+        <div class="main col-span-3 grid gap-5 grid-cols-3"></div>
+        <div class="user col-span-3"></div>
+    </div>
 
-      <div class="main grid p-5 grid-cols-3 gap-5">
-
-
-      </div>
 
 	</main>
     

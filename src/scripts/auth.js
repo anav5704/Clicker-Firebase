@@ -1,7 +1,10 @@
 // Function imports for firebase auth and firebase firestore
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import { getFirestore, collection, getDocs,onSnapshot  } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc  } from "firebase/firestore";
 import { app } from "../firebase/client";
+
+
+const UserDetails = document.querySelector(".user");
 
 // Initialise firebase firestore database
 const db = getFirestore(app);
@@ -34,10 +37,21 @@ auth.onAuthStateChanged( (user) => {
         console.log("User Logged In", user)
         
         const colrRef = collection(db, "Tips")
+        const docRef2 = doc(db, "User", user.uid);
 
         onSnapshot(colrRef, (snapshot) => {
             populate(snapshot)
             console.log(snapshot.docs)
+        })
+
+        onSnapshot(docRef2, (snapshot) => {
+            UserDetails.innerHTML += `
+            <div class="p-5 rounded-md shadow-xl">
+            <h1 class="text-xl font-semibold">User details</h1>
+            <p>Name: ${snapshot.data().Name}</p>
+            <p>Email: ${user.email}</p>
+            </iv>
+        `
         })
     }
     else {
@@ -46,6 +60,7 @@ auth.onAuthStateChanged( (user) => {
          <h1 class="text-xl font-semibold">Log In to see data</h1>
          </div>
          `
+         UserDetails.innerHTML = ""
     }
 })
 
@@ -63,9 +78,13 @@ signupForm.addEventListener("submit", (e) => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
 
+        setDoc(doc(db, "User", userCredential.user.uid) , {
+            Name: signupForm['signup-firebase-name'].value
+        });
+
+    }).then( () => {
         signupForm.classList.remove("show")
         signupForm.reset();
-
     })
 })
 
