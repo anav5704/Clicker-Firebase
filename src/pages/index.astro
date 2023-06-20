@@ -9,6 +9,7 @@ import Card from '../components/Card.astro';
 		<nav class="p-5 flex justify-between items-center">
             <h1>Clicker</h1>
             <div>
+                <button id="save" class="btn> mr-5" >Save</button>
                 <button class="btn firebase-btn mr-5" data-target="signup">Sign Up</button>
                 <button class="btn firebase-btn mr-5" data-target="login">Log In</button>
                 <button class="btn firebase-btn " data-target="logout" id="logout">Log Out</button>
@@ -22,6 +23,11 @@ import Card from '../components/Card.astro';
         <div class="user col-span-3"></div>
     </div>
 
+        <div  id="game">
+            <button id="clicker" class="px-5 py-2 mb-2 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex m-auto">Click Me 😫</button>
+            <h1 id="score" class="text-xl text-center font-semibold"></h1>
+        </div>
+    
 
 	</main>
     
