@@ -10,6 +10,7 @@ const Game = document.querySelector("#game");
 const CLicker = document.querySelector("#clicker");
 const Score = document.querySelector("#score");
 const Save = document.querySelector("#save");
+const ApplyBtn = document.querySelectorAll(".applyBtn");
 
 // Initialise firebase firestore database
 const db = getFirestore(app);
@@ -26,7 +27,7 @@ auth.onAuthStateChanged( (user) => {
         Game.style.display = "block"
         Main.innerHTML = ""
         UserDetails.innerHTML = `
-        <div class="p-5 rounded-md shadow-xl">
+        <div class="p-5 rounded-md shadow-xl border">
         <h1 class="text-xl font-semibold">Account details</h1>
         <p>Email: ${user.email}</p>
         </iv>
@@ -41,6 +42,18 @@ auth.onAuthStateChanged( (user) => {
                 Clicks ++;
                 Score.innerHTML = `Score: ${Clicks}`
             })
+
+            ApplyBtn.forEach(button => {
+                button.addEventListener("click", () => {
+                    if(Clicks >= button.dataset.price){
+                        CLicker.classList.replace( CLicker.dataset.name , button.dataset.name)
+                        CLicker.dataset.name = button.dataset.name;
+                    }
+                    else {
+                        console.log("Not enough clicks")
+                    }
+                })
+            });
             
             Save.addEventListener("click", () => {
                 updateDoc(docRef, {
