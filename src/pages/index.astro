@@ -28,27 +28,41 @@ import Card from '../components/Card.astro';
             <h1 id="score" class="text-xl text-center font-semibold"></h1>
         </div>
     
-        <div id="store" class="grid grid-cols-2 gap-5 p-5 w-3/4 m-auto">
+        <div id="store" class="grid grid-cols-3 gap-5 p-5 ">
 
-            <div class="p-2 bg-slate-300 shadow-lg rounded-md h-40 flex flex-col justify-evenly text-center items-center col-span-1 border">
+            <div data-price="5" class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
                <button class="win7-btn">Button</button>
-               <p>Default Button</p>
+               <p>Windows 7 Button</p>
+               <p>Price: 5 Clicks</p>
                <div class="flex items-center justify-around w-full">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
-                    <button data-price="52" data-name="win7-btn" class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
+                    <button data-price="5" data-name="win7-btn" class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
                 </div>
             </div>
 
-            <div class="p-2 bg-slate-300 shadow-lg rounded-md h-40 flex flex-col justify-evenly text-center items-center col-span-1 border">
+            <div data-price="10"  class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
                <button class="button-29">Button</button>
-               <p>Default Button</p>
+               <p>Plastic Button</p>
+               <p>Price: 10 Clicks</p>
                <div class="flex items-center justify-around w-full">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
-                    <button data-price="52" data-name="button-29"  class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
+                    <button data-price="6" data-name="button-29"  class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
+                </div>
+            </div>
+
+            <div data-price="15" class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
+               <button class="button-74">Button</button>
+               <p>Comic Button</p>
+               <p>Price: 15 Clicks</p>
+               <div class="flex items-center justify-around w-full">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                    <button data-price="6" data-name="button-74"  class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
                 </div>
             </div>
 
@@ -74,7 +88,6 @@ import Card from '../components/Card.astro';
 .win7-btn {
     border-radius: 3px;
     border: 1px solid #ddd;
-    padding: 5px 15px 5px 15px;
     background: #f2f2f2;
     background: -moz-linear-gradient(top, #f2f2f2 0%, #ebebeb 42%, #dddddd 47%, #cfcfcf 100%);
     background: -webkit-linear-gradient(top, #f2f2f2 0%, #ebebeb 42%, #dddddd 47%, #cfcfcf 100%);
@@ -82,10 +95,11 @@ import Card from '../components/Card.astro';
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#cfcfcf', GradientType=0);
     transition: all 0.1s ease-in;
     border: 1px solid #707070;
+    padding: 5px 15px !important;
+
 }
 
-.win7-btn:hover,
-.win7-btn:focus {
+.win7-btn:hover {
     outline: 0;
     background: #eaf6fd;
     background: -moz-linear-gradient(top, #eaf6fd 0%, #d9f0fc 42%, #bee6fd 47%, #bce5fc 58%, #a7d9f5 100%);
@@ -117,13 +131,9 @@ import Card from '../components/Card.astro';
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  height: 40px;
   justify-content: center;
-  line-height: 1;
   list-style: none;
   overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
   position: relative;
   text-align: left;
   text-decoration: none;
@@ -133,7 +143,8 @@ import Card from '../components/Card.astro';
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
+  padding: 5px 15px !important;
+
 }
 
 .button-29:focus {
@@ -148,6 +159,34 @@ import Card from '../components/Card.astro';
 .button-29:active {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 10px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  padding: 5px 15px !important;
+
+
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
 }
 
 </style>

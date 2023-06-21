@@ -7,7 +7,9 @@ import { app } from "../firebase/client";
 const UserDetails = document.querySelector(".user");
 const Main = document.querySelector(".main");
 const Game = document.querySelector("#game");
+const Store = document.getElementById("store");
 const CLicker = document.querySelector("#clicker");
+const Card = document.querySelectorAll(".card");
 const Score = document.querySelector("#score");
 const Save = document.querySelector("#save");
 const ApplyBtn = document.querySelectorAll(".applyBtn");
@@ -25,6 +27,7 @@ auth.onAuthStateChanged( (user) => {
         console.log("User Logged In", user)
 
         Game.style.display = "block"
+        Store.style.display = "grid"
         Main.innerHTML = ""
         UserDetails.innerHTML = `
         <div class="p-5 rounded-md shadow-xl border">
@@ -32,21 +35,57 @@ auth.onAuthStateChanged( (user) => {
         <p>Email: ${user.email}</p>
         </iv>
         `
-        const docRef = doc(db, "Score", user.uid)
+        const docRef = doc(db, "User", user.uid)
 
         onSnapshot(docRef, (snapshot) => {
+       
+
             Score.innerHTML = `Score: ${snapshot.data().Score}`
 
             let Clicks = snapshot.data().Score 
+            
             CLicker.addEventListener("click", () => {
                 Clicks ++;
+                checkCards()
                 Score.innerHTML = `Score: ${Clicks}`
             })
 
+            function checkCards() {
+                Card.forEach( (card) => {
+                    if( card.dataset.price > Clicks) {
+                        card.style.opacity = "0.5"
+                        card.style.pointerEvents = "none"
+                    }
+                    else {
+                        card.style.opacity = ""
+                        card.style.pointerEvents = ""
+                    }
+                })
+            }
+
+            checkCards()
+
+            let Current = snapshot.data().Button;
+            
+            function checkButton () {
+                if (Current !== "gameBtn") {
+                    CLicker.classList.replace( "gameBtn" , snapshot.data().Button)
+                    console.log("Loaded Custom Button")
+                    Current = snapshot.data().Button;
+                }
+                else {
+                    Current = "gameBtn"
+                    console.log("Loaded Deftault button")
+                }
+            }
+
+            checkButton()
+            
             ApplyBtn.forEach(button => {
                 button.addEventListener("click", () => {
                     if(Clicks >= button.dataset.price){
-                        CLicker.classList.replace( CLicker.dataset.name , button.dataset.name)
+                        CLicker.classList.replace( Current , button.dataset.name)
+                        Current = button.dataset.name;
                         CLicker.dataset.name = button.dataset.name;
                     }
                     else {
@@ -57,7 +96,8 @@ auth.onAuthStateChanged( (user) => {
             
             Save.addEventListener("click", () => {
                 updateDoc(docRef, {
-                    Score: Clicks
+                    Score: Clicks,
+                    Button: CLicker.dataset.name
                   }).then( () => {
                     console.log("Saved New score: ", Clicks)
                   })
@@ -69,11 +109,12 @@ auth.onAuthStateChanged( (user) => {
     else {
          document.querySelector(".main").innerHTML = `
          <div class="p-5 text-center rounded-md shadow-xl col-span-3">
-         <h1 class="text-xl font-semibold">Log In to see data</h1>
+         <h1 class="text-xl font-semibold">Log In To Start Clicking!</h1>
          </div>
          `
          UserDetails.innerHTML = ""
          Game.style.display = "none"
+         Store.style.display = "none"
     }
 })
 
@@ -83,6 +124,7 @@ signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     // steal user information, respectfully
+    const userName = signupForm['signup-firebase-name'].value;
     const email = signupForm['signup-firebase-email'].value;
     const password = signupForm['signup-firebase-password'].value;
     console.log(email, password)
@@ -91,8 +133,10 @@ signupForm.addEventListener("submit", (e) => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
 
-        setDoc(doc(db, "Score", userCredential.user.uid) , {
-            Score: 0
+        setDoc(doc(db, "User", userCredential.user.uid) , {
+            Button: CLicker.dataset.name ,
+            Name: userName ,
+            Score: 0 
         });
 
     }).then( () => {

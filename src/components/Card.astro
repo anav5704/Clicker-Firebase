@@ -2,7 +2,7 @@
 const { title, type } = Astro.props;
 ---
 
-<form id={type} class="module text-white pointer-events-none bg-slate-400 opacity-0 fixed top-1/2 left-1/2 transition-all -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-start w-56 rounded-md p-5 h-72 text-left">
+<form id={type} class="module text-white pointer-events-none bg-slate-400 z-20 opacity-0 fixed top-1/2 left-1/2 transition-all -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-start w-56 rounded-md p-5 h-72 text-left">
     <h1 class="text-lg font-bold">{title}</h1>
 
     <svg  data-target=`${type}` xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="modal-close absolute right-5 top-6 w-5 h-5 cursor-pointer">
