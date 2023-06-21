@@ -1,8 +1,7 @@
 // Function imports for firebase auth and firebase firestore
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc, updateDoc  } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc, updateDoc, orderBy , limit, query  } from "firebase/firestore";
 import { app } from "../firebase/client";
-
 
 const UserDetails = document.querySelector(".user");
 const Main = document.querySelector(".main");
@@ -20,6 +19,17 @@ const db = getFirestore(app);
 // Initialise firebase Auth 
 const auth = getAuth(app);
 
+
+const colRef = query(collection(db, "User"), orderBy("Score", "desc"), limit(2));
+onSnapshot(colRef ,(snapshot) => {
+    let rank = 1
+    snapshot.docs.forEach((user) => {
+        console.log(`Rank: ${rank}`, `Name: ${user.data().Name}`, `Score: ${user.data().Score}`)
+        rank ++;
+    })
+})
+
+
 // Check if user is logged in or not
 auth.onAuthStateChanged( (user) => {
     if(user) {
@@ -29,24 +39,37 @@ auth.onAuthStateChanged( (user) => {
         Game.style.display = "block"
         Store.style.display = "grid"
         Main.innerHTML = ""
-        UserDetails.innerHTML = `
-        <div class="p-5 rounded-md shadow-xl border">
-        <h1 class="text-xl font-semibold">Account details</h1>
-        <p>Email: ${user.email}</p>
-        </iv>
-        `
+
         const docRef = doc(db, "User", user.uid)
 
         onSnapshot(docRef, (snapshot) => {
-       
-
+            UserDetails.innerHTML = `
+            <div class="p-5 rounded-md shadow-xl border">
+            <h1 class="text-xl font-semibold">Account details</h1>
+            <p>Name: ${snapshot.data().Name}</p>
+            <p>Region: ${snapshot.data().Region}</p>
+            </iv>
+            `
             Score.innerHTML = `Score: ${snapshot.data().Score}`
 
             let Clicks = snapshot.data().Score 
+
+            function checkSave() {
+                if ( CLicker.dataset.name !== snapshot.data().Button || Clicks !== snapshot.data().Score )  {
+                       Save.style.color = "teal"
+                }
+                else {
+                    console.log("All up to date mi amigo")
+                    Save.style.color = "black"
+
+                }
+            }
+                 
             
             CLicker.addEventListener("click", () => {
                 Clicks ++;
                 checkCards()
+                checkSave()
                 Score.innerHTML = `Score: ${Clicks}`
             })
 
@@ -71,7 +94,7 @@ auth.onAuthStateChanged( (user) => {
                 if (Current !== "gameBtn") {
                     CLicker.classList.replace( "gameBtn" , snapshot.data().Button)
                     console.log("Loaded Custom Button")
-                    Current = snapshot.data().Button;
+                    CLicker.dataset.name = snapshot.data().Button;
                 }
                 else {
                     Current = "gameBtn"
@@ -84,9 +107,10 @@ auth.onAuthStateChanged( (user) => {
             ApplyBtn.forEach(button => {
                 button.addEventListener("click", () => {
                     if(Clicks >= button.dataset.price){
-                        CLicker.classList.replace( Current , button.dataset.name)
+                        CLicker.classList.replace( CLicker.dataset.name , button.dataset.name)
                         Current = button.dataset.name;
                         CLicker.dataset.name = button.dataset.name;
+                        checkSave()
                     }
                     else {
                         console.log("Not enough clicks")
@@ -125,6 +149,7 @@ signupForm.addEventListener("submit", (e) => {
 
     // steal user information, respectfully
     const userName = signupForm['signup-firebase-name'].value;
+    const region = signupForm['signup-firebase-region'].value;
     const email = signupForm['signup-firebase-email'].value;
     const password = signupForm['signup-firebase-password'].value;
     console.log(email, password)
@@ -136,6 +161,8 @@ signupForm.addEventListener("submit", (e) => {
         setDoc(doc(db, "User", userCredential.user.uid) , {
             Button: CLicker.dataset.name ,
             Name: userName ,
+            Region: region ,
+            Email: email ,
             Score: 0 
         });
 
@@ -169,3 +196,8 @@ logOutBtn.addEventListener("click",(e) => {
     e.preventDefault();
     auth.signOut()
 })
+
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault(); 
+    e.returnValue = '';
+  });
