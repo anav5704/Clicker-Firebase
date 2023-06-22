@@ -12,6 +12,8 @@ const Card = document.querySelectorAll(".card");
 const Score = document.querySelector("#score");
 const Save = document.querySelector("#save");
 const ApplyBtn = document.querySelectorAll(".applyBtn");
+const NotLoggedinBtns = document.querySelectorAll(".notloggedin");
+const LoggedinBtns = document.querySelectorAll(".loggedin");
 
 // Initialise firebase firestore database
 const db = getFirestore(app);
@@ -36,6 +38,13 @@ auth.onAuthStateChanged( (user) => {
         console.log("Firebase Auth 🔑")
         console.log("User Logged In", user)
 
+        LoggedinBtns.forEach( btn => {
+            btn.style.display = "block"
+        })
+        NotLoggedinBtns.forEach( btn => {
+            btn.style.display = "none"
+        })
+
         Game.style.display = "block"
         Store.style.display = "grid"
         Main.innerHTML = ""
@@ -44,13 +53,13 @@ auth.onAuthStateChanged( (user) => {
 
         onSnapshot(docRef, (snapshot) => {
             UserDetails.innerHTML = `
-            <div class="p-5 rounded-md shadow-xl border">
+            <div class="p-5 rounded-md  border">
             <h1 class="text-xl font-semibold">Account details</h1>
             <p>Name: ${snapshot.data().Name}</p>
             <p>Region: ${snapshot.data().Region}</p>
             </iv>
             `
-            Score.innerHTML = `Score: ${snapshot.data().Score}`
+            Score.innerHTML = `Clicks: ${snapshot.data().Score}`
 
             let Clicks = snapshot.data().Score 
 
@@ -91,13 +100,13 @@ auth.onAuthStateChanged( (user) => {
             let Current = snapshot.data().Button;
             
             function checkButton () {
-                if (Current !== "gameBtn") {
-                    CLicker.classList.replace( "gameBtn" , snapshot.data().Button)
+                if (Current !== "clickr") {
+                    CLicker.classList.replace( "clickr" , snapshot.data().Button)
                     console.log("Loaded Custom Button")
                     CLicker.dataset.name = snapshot.data().Button;
                 }
                 else {
-                    Current = "gameBtn"
+                    Current = "clickr"
                     console.log("Loaded Deftault button")
                 }
             }
@@ -131,6 +140,14 @@ auth.onAuthStateChanged( (user) => {
 
     }
     else {
+
+        NotLoggedinBtns.forEach( btn => {
+            btn.style.display = "block"
+        })
+
+        LoggedinBtns.forEach( btn => {
+            btn.style.display = "none"
+        })
          document.querySelector(".main").innerHTML = `
          <div class="p-5 text-center rounded-md shadow-xl col-span-3">
          <h1 class="text-xl font-semibold">Log In To Start Clicking!</h1>
@@ -197,7 +214,7 @@ logOutBtn.addEventListener("click",(e) => {
     auth.signOut()
 })
 
-window.addEventListener('beforeunload', function (e) {
-    e.preventDefault(); 
-    e.returnValue = '';
-  });
+// window.addEventListener('beforeunload', function (e) {
+//     e.preventDefault(); 
+//     e.returnValue = '';
+// });

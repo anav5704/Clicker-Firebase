@@ -1,22 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
 ---
 
 <Layout title="Clicker">
-	<main class="bg-slate-300 h-screen">
-        
-		<nav class="p-5 flex justify-between items-center">
-            <h1>Clicker</h1>
-            <div>
-                <button id="save" class="btn> mr-5" >Save</button>
-                <button class="btn firebase-btn mr-5" data-target="signup">Sign Up</button>
-                <button class="btn firebase-btn mr-5" data-target="login">Log In</button>
-                <button class="btn firebase-btn " data-target="logout" id="logout">Log Out</button>
-            </div>
-        </nav>
+	<main class="">
 
-    <div class="p-5 gap-5 grid grid-cols-3">
+        <div class="p-5 gap-5 grid grid-cols-3">
         <Card title="Log In" type="login" />
         <Card title="Sign Up"  type="signup" />
         <div class="main col-span-3 grid gap-5 grid-cols-3"></div>
@@ -24,176 +15,24 @@ import Card from '../components/Card.astro';
     </div>
 
         <div  id="game" class="text-center">
-            <button id="clicker" class="gameBtn" data-name="gameBtn">Click Me 😫</button>
+            <button id="clicker" class="clickr" data-name="clickr">Click Me 😫</button>
             <h1 id="score" class="text-xl text-center font-semibold"></h1>
         </div>
-    
-        <div id="store" class="grid grid-cols-3 gap-5 p-5 ">
-
-            <div data-price="5" class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
-               <button class="win7-btn">Button</button>
-               <p>Windows 7 Button</p>
-               <p>Price: 5 Clicks</p>
-               <div class="flex items-center justify-around w-full">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
-                  </svg>
-                  <button data-price="5" data-name="win7-btn" class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
-                </div>
-            </div>
-
-            <div data-price="10"  class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
-               <button class="button-29">Button</button>
-               <p>Plastic Button</p>
-               <p>Price: 10 Clicks</p>
-               <div class="flex items-center justify-around w-full">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
-                  </svg>
-                    <button data-price="6" data-name="button-29"  class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
-                </div>
-            </div>
-
-            <div data-price="15" class="card before:p-2 bg-slate-300 shadow-lg rounded-md h-48 flex flex-col justify-evenly text-center items-center col-span-1 border">
-               <button class="button-74">Button</button>
-               <p>Comic Button</p>
-               <p>Price: 15 Clicks</p>
-               <div class="flex items-center justify-around w-full">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
-                  </svg>                 
-                    <button data-price="6" data-name="button-74"  class="applyBtn px-2 py-1 bg-slate-500 shadow-lg hover:bg-slate-600 transition-all rounded-md text-white flex">Appy</button>
-                </div>
-            </div>
-
+        
+        
+        <div id="store" class="grid grid-cols-4 gap-5 mb-5">
+            <h1 class="text-3xl col-span-4">Button Store</h1>
+            <Button title="Clickr Defaults" name="clickr" price="0"> </Button>
+            <Button title="Windows 7" name="win7-btn" price="5"> </Button>
+            <Button title="Plastic Toy" name="button-29" price="25"> </Button>
+            <Button title="Toon Shaded" name="button-74" price="50"> </Button>
         </div>
-
-        <div id="leaderboards">
 
         </div>
 	</main>
-    
+    <script src="../scripts/auth.js"></script>
 </Layout>
 
-<style>
-
-.gameBtn {
-    padding: 10px 20px;
-    background-color: slategrey;
-    border-radius: 5px;
-    transition: all .3s ease;
-    color: white;
-}
-
-.gameBtn:hover {
-    background-color: steelblue;
-}
-
-.win7-btn {
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    background: #f2f2f2;
-    background: -moz-linear-gradient(top, #f2f2f2 0%, #ebebeb 42%, #dddddd 47%, #cfcfcf 100%);
-    background: -webkit-linear-gradient(top, #f2f2f2 0%, #ebebeb 42%, #dddddd 47%, #cfcfcf 100%);
-    background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 42%, #dddddd 47%, #cfcfcf 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#cfcfcf', GradientType=0);
-    transition: all 0.1s ease-in;
-    border: 1px solid #707070;
-    padding: 5px 15px !important;
-
-}
-
-.win7-btn:hover {
-    outline: 0;
-    background: #eaf6fd;
-    background: -moz-linear-gradient(top, #eaf6fd 0%, #d9f0fc 42%, #bee6fd 47%, #bce5fc 58%, #a7d9f5 100%);
-    background: -webkit-linear-gradient(top, #eaf6fd 0%, #d9f0fc 42%, #bee6fd 47%, #bce5fc 58%, #a7d9f5 100%);
-    background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 42%, #bee6fd 47%, #bce5fc 58%, #a7d9f5 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#eaf6fd', endColorstr='#a7d9f5', GradientType=0);
-    border: 1px solid #3C7FB1;
-    box-shadow: 0 0 3px #A7D9F5;
-    -o-box-shadow: 0 0 3px #A7D9F5;
-    -webkit-box-shadow: 0 0 3px #A7D9F5;
-    -moz-box-shadow: 0 0 3px #A7D9F5;
-}
-
-.win7-btn:active {
-    box-shadow: inset 0 -1px 6px rgba(0, 0, 0, 0.2), inset 0 -0.7em #BEE6FD, 0 0 3px #A7D9F5;
-    -o-box-shadow: inset 0 -1px 6px rgba(0, 0, 0, 0.2), inset 0 -0.7em #BEE6FD, 0 0 3px #A7D9F5;
-    -webkit-box-shadow: inset 0 -1px 6px rgba(0, 0, 0, 0.2), inset 0 -0.7em #BEE6FD, 0 0 3px #A7D9F5;
-    -moz-box-shadow: inset 0 -1px 6px rgba(0, 0, 0, 0.2), inset 0 -0.7em #BEE6FD, 0 0 3px #A7D9F5;
-}
-
-.button-29 {
-  align-items: center;
-  appearance: none;
-  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
-  border: 0;
-  border-radius: 6px;
-  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  list-style: none;
-  overflow: hidden;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow,transform;
-  padding: 5px 15px !important;
-
-}
-
-.button-29:focus {
-  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-}
-
-.button-29:hover {
-  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.button-29:active {
-  box-shadow: #3c4fe0 0 3px 7px inset;
-  transform: translateY(2px);
-}
-
-.button-74 {
-  background-color: #fbeee0;
-  border: 2px solid #422800;
-  border-radius: 10px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  padding: 5px 15px !important;
-
-
-}
-
-.button-74:hover {
-  background-color: #fff;
-}
-
-.button-74:active {
-  box-shadow: #422800 2px 2px 0 0;
-  transform: translate(2px, 2px);
-}
-
-</style>
 
 
 

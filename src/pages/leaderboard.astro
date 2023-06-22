@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Clicker">
+	<main class=" flex justify-center flex-col items-center">
+        <h1 class="my-5 text-3xl col-span-4">Global Leaderboards</h1>
+        <div class="text-let w-2/5" id="leaderboard">
+	</main>
+    
+</Layout>
+
+<script src="../scripts/leaderboard.js"></script>
+
+<style is:inline>
+    #leaderboard  p {
+        border: 1px solid #ffffff47;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #1e293b;
+        padding: 5px 0px;
+    }
+
+    #leaderboard  p {
+        margin-bottom: 10px;
+    }
+
+    #leaderboard  p .score {
+       float: right;
+       margin-right: 20px;
+    }
+    
+    #leaderboard  p:nth-of-type(1){
+        border: 1px solid #ffd700 ;
+    }
+    
+    #leaderboard  p:nth-of-type(2){
+        border: 1px solid silver ;
+    }
+    
+    #leaderboard  p:nth-of-type(3){
+        border: 1px solid #CD7F32 ;
+    }
+
+    #leaderboard  p .name {
+       margin-left: 20px;
+    }
+
+    #leaderboard  p .region {
+       margin-left: 20px;
+    }
+
+    #leaderboard  p .rank {       
+        margin-left: 20px;
+    }
+
+    </style>
+
+
+
