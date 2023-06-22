@@ -6,26 +6,35 @@ import Button from '../components/Button.astro';
 
 <Layout title="Clicker">
 	<main class="">
-
-        <div class="p-5 gap-5 grid grid-cols-3">
         <Card title="Log In" type="login" />
         <Card title="Sign Up"  type="signup" />
-        <div class="main col-span-3 grid gap-5 grid-cols-3"></div>
-        <div class="user col-span-3"></div>
+        <div class="main"></div>
     </div>
 
-        <div  id="game" class="text-center">
-            <button id="clicker" class="clickr" data-name="clickr">Click Me 😫</button>
-            <h1 id="score" class="text-xl text-center font-semibold"></h1>
+        <div  id="game" class="text-center h-80v flex flex-col items-center justify-center">
+            <button id="clicker" class="clickr py-3 px-10" data-name="clickr">Click Me 😫</button>
+            <h1 id="score" class="text-center  mt-2"></h1>
         </div>
         
         
         <div id="store" class="grid grid-cols-4 gap-5 mb-5">
             <h1 class="text-3xl col-span-4">Button Store</h1>
             <Button title="Clickr Defaults" name="clickr" price="0"> </Button>
-            <Button title="Windows 7" name="win7-btn" price="5"> </Button>
-            <Button title="Plastic Toy" name="button-29" price="25"> </Button>
-            <Button title="Toon Shaded" name="button-74" price="50"> </Button>
+            <Button title="Windows 7" name="win7-btn" price="25"> </Button>
+            <Button title="Plastic Toy" name="button-29" price="50"> </Button>
+            <Button title="Toon Shaded" name="button-74" price="75"> </Button>
+            <Button title="Chalk Block" name="button-30" price="100"> </Button>
+            <Button title="Cut Cutout" name="dott" price="125"> </Button>
+            <Button title="Calm Amber" name="button-87" price="150"> </Button>
+            <Button title="Alien Pill" name="button-33" price="200"> </Button>
+            <Button title="Galaxy Glow" name="button-63" price="300"> </Button>
+            <Button title="Glitchty Gabe" name="button-49" price="400"> </Button>
+            <Button title="Crunched Paper" name="button-55" price="500"> </Button>
+            <Button title="Tilted Glass" name="button-53" price="600"> </Button>
+            <Button title="This mf glowing fr fr" name="glower" price="700"> </Button>
+            <Button title="Into the Light" name="silvy" price="800"> </Button>
+            <Button title="RTX Container" name="button" price="900"> </Button>
+            <Button title="Kings Click" name="goldy" price="1000"> </Button>
         </div>
 
         </div>

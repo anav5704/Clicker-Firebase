@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} fr
 import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc, updateDoc, orderBy , limit, query  } from "firebase/firestore";
 import { app } from "../firebase/client";
 
-const UserDetails = document.querySelector(".user");
+// const UserDetails = document.querySelector(".user");
 const Main = document.querySelector(".main");
 const Game = document.querySelector("#game");
 const Store = document.getElementById("store");
@@ -45,31 +45,25 @@ auth.onAuthStateChanged( (user) => {
             btn.style.display = "none"
         })
 
-        Game.style.display = "block"
+        Game.style.display = "flex"
         Store.style.display = "grid"
         Main.innerHTML = ""
 
         const docRef = doc(db, "User", user.uid)
 
         onSnapshot(docRef, (snapshot) => {
-            UserDetails.innerHTML = `
-            <div class="p-5 rounded-md  border">
-            <h1 class="text-xl font-semibold">Account details</h1>
-            <p>Name: ${snapshot.data().Name}</p>
-            <p>Region: ${snapshot.data().Region}</p>
-            </iv>
-            `
+
             Score.innerHTML = `Clicks: ${snapshot.data().Score}`
 
             let Clicks = snapshot.data().Score 
 
             function checkSave() {
                 if ( CLicker.dataset.name !== snapshot.data().Button || Clicks !== snapshot.data().Score )  {
-                       Save.style.color = "teal"
+                       Save.style.display = "block"
                 }
                 else {
                     console.log("All up to date mi amigo")
-                    Save.style.color = "black"
+                    Save.style.display = "none"
 
                 }
             }

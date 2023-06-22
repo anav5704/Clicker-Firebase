@@ -12,7 +12,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 
-const colRef = query(collection(db, "User"), orderBy("Score", "desc"), limit(10));
+const colRef = query(collection(db, "User"), orderBy("Score", "desc"));
 onSnapshot(colRef ,(snapshot) => {
     let rank = 1
     snapshot.docs.forEach((user) => {
