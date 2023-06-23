@@ -40,13 +40,11 @@ auth.onAuthStateChanged( (user) => {
         Form.style.display = "none"
 
         const docRef = doc(db, "User", user.uid)
-
         onSnapshot(docRef, (snapshot) => {
 
             Score.innerHTML = `Clicks: ${snapshot.data().Score}`
-
             let Clicks = snapshot.data().Score 
-
+            
             function checkSave() {
                 if ( CLicker.dataset.name !== snapshot.data().Button || Clicks !== snapshot.data().Score )  {
                        Save.style.display = "block"
@@ -54,11 +52,9 @@ auth.onAuthStateChanged( (user) => {
                 else {
                     console.log("All up to date mi amigo")
                     Save.style.display = "none"
-
                 }
             }
                  
-            
             CLicker.addEventListener("click", () => {
                 Clicks ++;
                 checkCards()
@@ -82,7 +78,6 @@ auth.onAuthStateChanged( (user) => {
             checkCards()
 
             let Current = snapshot.data().Button;
-            
             function checkButton () {
                 if (Current !== "clickr") {
                     CLicker.classList.replace( "clickr" , snapshot.data().Button)
@@ -110,25 +105,30 @@ auth.onAuthStateChanged( (user) => {
                     }
                 })
             });
+
+            async function save(){
+                try{
+                    updateDoc(docRef, {
+                        Score: Clicks,
+                        Button: CLicker.dataset.name
+                    })
+                    console.log("Saved New score: ", Clicks)
+                }
+                catch(err) {
+                    console.log(err)
+                }
+            }
             
             Save.addEventListener("click", () => {
-                updateDoc(docRef, {
-                    Score: Clicks,
-                    Button: CLicker.dataset.name
-                  }).then( () => {
-                    console.log("Saved New score: ", Clicks)
-                  })
-                  
+                save()
             })
         })
 
     }
     else {
-
         NotLoggedinBtns.forEach( btn => {
             btn.style.display = "block"
         })
-
         LoggedinBtns.forEach( btn => {
             btn.style.display = "none"
         })
@@ -139,22 +139,17 @@ auth.onAuthStateChanged( (user) => {
     }
 })
 
-// Firebase auth signup
-const signupForm = document.querySelector("#signup")
-signupForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+// Firebase auth signup function
+async function signup() {
+       try {
+         // steal user information, respectfully
+         const userName = signupForm['signup-firebase-name'].value;
+         const region = signupForm['signup-firebase-region'].value;
+         const email = signupForm['signup-firebase-email'].value;
+         const password = signupForm['signup-firebase-password'].value;
 
-    // steal user information, respectfully
-    const userName = signupForm['signup-firebase-name'].value;
-    const region = signupForm['signup-firebase-region'].value;
-    const email = signupForm['signup-firebase-email'].value;
-    const password = signupForm['signup-firebase-password'].value;
-    console.log(email, password)
-    
-    // create user
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-
+         //Create user with preset fields in document
+         const userCredential = await createUserWithEmailAndPassword(auth, email, password)
         setDoc(doc(db, "User", userCredential.user.uid) , {
             Button: CLicker.dataset.name ,
             Name: userName ,
@@ -162,45 +157,50 @@ signupForm.addEventListener("submit", (e) => {
             Email: email ,
             Score: 0 
         });
-
-    }).then( () => {
+    
         signupForm.classList.remove("show")
         signupForm.reset();
-    }).catch(err => {
+    }
+        
+    catch(err) {
         Error.style.display = "block"
         Error.innerHTML = `<p>${err.message}</p>`
-    }) 
+    }
+}
+
+// Firebase auth signin event istener
+const signupForm = document.querySelector("#signup")
+signupForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    signup()
 })
 
-// Firebase auth sigin
+// Firebase auth login function
+async function login() {
+    try {
+        const email = loginForm['login-firebase-email'].value;
+        const password = loginForm['login-firebase-password'].value;
+    
+        await signInWithEmailAndPassword(auth, email, password)  
+        loginForm.classList.remove("show")
+        loginForm.reset();            
+    }
+    catch(err){
+        Error.style.display = "block"
+        Error.innerHTML = `<p>${err.message}</p>`
+    }
+} 
+
+// Firebase auth login event listener
 const loginForm = document.querySelector("#login")
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = loginForm['login-firebase-email'].value;
-    const password = loginForm['login-firebase-password'].value;
-    
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {       
-
-        loginForm.classList.remove("show")
-        loginForm.reset();
-        
-    }).catch(err => {
-        Error.style.display = "block"
-        Error.innerHTML = `<p>${err.message}</p>`
-    }) 
+    login()
 })
 
 // Firebase auth signout
 const logOutBtn = document.querySelector("#logout");    
 logOutBtn.addEventListener("click",(e) => {
-    console.log("Firebase Auth 🔑")
-    console.log("User Logged Out")
     e.preventDefault();
     auth.signOut()
 })
-
-// window.addEventListener('beforeunload', function (e) {
-//     e.preventDefault(); 
-//     e.returnValue = '';
-// });

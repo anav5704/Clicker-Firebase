@@ -6,14 +6,15 @@ import Button from '../components/Button.astro';
 
 <Form />
 <Layout title="Clicker">
+    <main>
         <div  id="game" class="hidden text-center h-80v flex-col items-center justify-center">
             <button id="clicker" class="clickr py-3 px-10" data-name="clickr">Click Me</button>
             <h1 id="score" class="text-center  mt-2"></h1>
         </div>
         
         
-        <div id="store" class="hidden grid-cols-4 gap-5 mb-5">
-            <h1 class="text-3xl col-span-4">Button Store</h1>
+        <div id="store" class="hidden grid-cols-1 md:grid-cols-4 gap-5 mb-5">
+            <h1 class="text-3xl md:col-span-4">Button Store</h1>
             <Button title="Clickr Defaults" name="clickr" price="0"> </Button>
             <Button title="Windows 7" name="win7-btn" price="25"> </Button>
             <Button title="Plastic Toy" name="button-29" price="50"> </Button>
