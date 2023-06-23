@@ -1,0 +1,91 @@
+<div id="form" class="w-3/4 m-auto hidden left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-800 border absolute  border-[#ffffff47] rounded-md iitems-center pointer-events-none">
+    <form id="login" class="w-1/2 module text-white  flex flex-col justify-between items-start rounded-md p-5 h-fit text-left">
+        <h1 class="text-lg font-bold">Log In</h1>
+        <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="Name" type="text" name="" id="login-firebase-name">
+        <!-- Country names and Country Code -->
+        <select id="login-firebase-region">
+            <option value="">Region</option>
+            <option value="AF">Africa</option>
+            <option value="AS">Asia</option>
+            <option value="AN">Antarctica</option>
+            <option value="EU">Europe</option>
+            <option value="OC">Oceania</option>
+            <option value="NA">North America</option>
+            <option value="SA">South America</option>
+          </select>
+    
+        <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="E-mail" type="email" name="" id="login-firebase-email">
+        <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="Enter Password" type="password" name="" id="login-firebase-password">
+        <button type="submit" class="clickr mt-3">Log In</button>
+    </form>
+
+    <form id="signup" class="w-1/2 module text-white  flex flex-col justify-between items-start rounded-md p-5 h-fit text-left">
+        <h1 class="text-lg font-bold">Sign Up</h1>
+        <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="Name" type="text" name="" id="signup-firebase-name">
+        <!-- Country names and Country Code -->
+        <select id="signup-firebase-region">
+            <option value="">Region</option>
+            <option value="AF">Africa</option>
+            <option value="AS">Asia</option>
+            <option value="AN">Antarctica</option>
+            <option value="EU">Europe</option>
+            <option value="OC">Oceania</option>
+            <option value="NA">North America</option>
+            <option value="SA">South America</option>
+          </select>
+            <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="E-mail" type="email" name="" id="signup-firebase-email">
+        <input autocomplete="off" class="w-full p-2 rounded-sm" placeholder="Create Password" type="password" name="" id="signup-firebase-password">
+        <button type="submit" class="clickr mt-3">Create Account</button>
+    </form>
+    <div id="error" class="absolute top-full hidden text-center w-full mt-5 bg-slate-800 border p-1 rounded-md  border-[#ff4000] r">
+        <p>User does not exist</p>
+    </div>
+</div>
+
+<style is:inline >
+
+    select {
+        padding: 5px;
+        color: gray;
+        width: 100%;
+    }
+
+    .show {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    input {
+        color: slategrey;
+        outline: none;
+        background-color: #1e293b;
+        border-bottom:1px solid #ffffff47 ;
+        margin-bottom: 5px;
+    }
+
+    input:focus {
+        border-bottom:1px solid turquoise ;
+
+    }
+
+    select {
+        color: slategrey;
+        outline: none;
+        background-color: #1e293b;
+        border-bottom:1px solid #ffffff47 ;
+    }
+
+    select:focus{
+        border-bottom:1px solid turquoise ;
+
+    }
+
+    option {
+        color: whitesmoke;
+    }
+
+    .modal {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+</style>

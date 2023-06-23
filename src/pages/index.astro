@@ -1,23 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Form from '../components/Form.astro';
 import Button from '../components/Button.astro';
 ---
 
+<Form />
 <Layout title="Clicker">
-	<main class="">
-        <Card title="Log In" type="login" />
-        <Card title="Sign Up"  type="signup" />
-        <div class="main"></div>
-    </div>
-
-        <div  id="game" class="text-center h-80v flex flex-col items-center justify-center">
-            <button id="clicker" class="clickr py-3 px-10" data-name="clickr">Click Me 😫</button>
+        <div  id="game" class="hidden text-center h-80v flex-col items-center justify-center">
+            <button id="clicker" class="clickr py-3 px-10" data-name="clickr">Click Me</button>
             <h1 id="score" class="text-center  mt-2"></h1>
         </div>
         
         
-        <div id="store" class="grid grid-cols-4 gap-5 mb-5">
+        <div id="store" class="hidden grid-cols-4 gap-5 mb-5">
             <h1 class="text-3xl col-span-4">Button Store</h1>
             <Button title="Clickr Defaults" name="clickr" price="0"> </Button>
             <Button title="Windows 7" name="win7-btn" price="25"> </Button>

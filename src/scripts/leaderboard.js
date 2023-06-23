@@ -11,25 +11,21 @@ const db = getFirestore(app);
 // Initialise firebase Auth 
 const auth = getAuth(app);
 
-
-const colRef = query(collection(db, "User"), orderBy("Score", "desc"));
-onSnapshot(colRef ,(snapshot) => {
-    let rank = 1
-    snapshot.docs.forEach((user) => {
-        Leaderboard.innerHTML += `<p><span class="rank">${rank}</span><span class="region">${user.data().Region}</span><span class="name">${user.data().Name}</span><span class="score"> ${user.data().Score} Clicks</span>
-       </p>`
-          rank ++;
-    })
-})
-
-
 // Check if user is logged in or not
 auth.onAuthStateChanged( (user) => {
     if(user) {
-        console.log("Firebase Auth 🔑")
-        console.log("User Logged In", user)
+        const colRef = query(collection(db, "User"), orderBy("Score", "desc"));
+        onSnapshot(colRef ,(snapshot) => {
+            let rank = 1
+            snapshot.docs.forEach((user) => {
+                Leaderboard.innerHTML += `<p><span class="rank">${rank}</span><span class="region">${user.data().Region}</span><span class="name">${user.data().Name}</span><span class="score"> ${user.data().Score} Clicks</span>
+            </p>`
+                rank ++;
+            })
+        })
+
     }
     else {
-
+        console.log("Login to see leaderboards")
     }
 })

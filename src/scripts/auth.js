@@ -4,8 +4,9 @@ import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc, updateDoc, o
 import { app } from "../firebase/client";
 
 // const UserDetails = document.querySelector(".user");
-const Main = document.querySelector(".main");
+const Error = document.querySelector("#error");
 const Game = document.querySelector("#game");
+const Form = document.querySelector("#form");
 const Store = document.getElementById("store");
 const CLicker = document.querySelector("#clicker");
 const Card = document.querySelectorAll(".card");
@@ -20,17 +21,6 @@ const db = getFirestore(app);
 
 // Initialise firebase Auth 
 const auth = getAuth(app);
-
-
-const colRef = query(collection(db, "User"), orderBy("Score", "desc"), limit(2));
-onSnapshot(colRef ,(snapshot) => {
-    let rank = 1
-    snapshot.docs.forEach((user) => {
-        console.log(`Rank: ${rank}`, `Name: ${user.data().Name}`, `Score: ${user.data().Score}`)
-        rank ++;
-    })
-})
-
 
 // Check if user is logged in or not
 auth.onAuthStateChanged( (user) => {
@@ -47,7 +37,7 @@ auth.onAuthStateChanged( (user) => {
 
         Game.style.display = "flex"
         Store.style.display = "grid"
-        Main.innerHTML = ""
+        Form.style.display = "none"
 
         const docRef = doc(db, "User", user.uid)
 
@@ -142,12 +132,8 @@ auth.onAuthStateChanged( (user) => {
         LoggedinBtns.forEach( btn => {
             btn.style.display = "none"
         })
-         document.querySelector(".main").innerHTML = `
-         <div class="p-5 text-center rounded-md shadow-xl col-span-3">
-         <h1 class="text-xl font-semibold">Log In To Start Clicking!</h1>
-         </div>
-         `
-         UserDetails.innerHTML = ""
+        Form.style.display = "flex"
+        Form.style.pointerEvents = "all"
          Game.style.display = "none"
          Store.style.display = "none"
     }
@@ -180,7 +166,10 @@ signupForm.addEventListener("submit", (e) => {
     }).then( () => {
         signupForm.classList.remove("show")
         signupForm.reset();
-    })
+    }).catch(err => {
+        Error.style.display = "block"
+        Error.innerHTML = `<p>${err.message}</p>`
+    }) 
 })
 
 // Firebase auth sigin
@@ -191,12 +180,15 @@ loginForm.addEventListener("submit", (e) => {
     const password = loginForm['login-firebase-password'].value;
     
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {            
-        
+    .then((userCredential) => {       
+
         loginForm.classList.remove("show")
         loginForm.reset();
         
-    })
+    }).catch(err => {
+        Error.style.display = "block"
+        Error.innerHTML = `<p>${err.message}</p>`
+    }) 
 })
 
 // Firebase auth signout
