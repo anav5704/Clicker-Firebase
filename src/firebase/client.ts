@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "clicker-efa4f.appspot.com",
   messagingSenderId: "562627723723",
   appId: "1:562627723723:web:56028e168e03b50d1a364e",
-  measurementId: "G-TYZNCL5VVT"
+  measurementId: "G-VR5YDEZDWX"
 };
 
 export const app = initializeApp(firebaseConfig);
