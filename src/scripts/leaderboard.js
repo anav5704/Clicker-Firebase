@@ -15,7 +15,7 @@ const auth = getAuth(app);
 // Check if user is logged in or not
 auth.onAuthStateChanged( (user) => {
     if(user) {
-        const colRef = query(collection(db, "User"), orderBy("Score", "desc"));
+        const colRef = query(collection(db, "User"), orderBy("Score", "desc"), limit(10));
         onSnapshot(colRef ,(snapshot) => {
             Leaderboard.innerHTML = " "
             let rank = 1
