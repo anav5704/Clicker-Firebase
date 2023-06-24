@@ -165,7 +165,7 @@ async function signup() {
         
     catch(err) {
         ErrorSignin.style.display = "block"
-        ErrorSignin.innerHTML = `<p>${err.message}</p>`
+        ErrorSignin.innerHTML = `<p>${err.code}</p>`
     }
 }
 
@@ -188,7 +188,8 @@ async function login() {
     }
     catch(err){
         ErrorLogin.style.display = "block"
-        ErrorLogin.innerHTML = `<p>${err.message}</p>`
+        console.log(err)
+        ErrorLogin.innerHTML = `<p>${err.code}</p>`
     }
 } 
 
