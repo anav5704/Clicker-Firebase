@@ -7,7 +7,7 @@ const Leaderboard = document.querySelector("#leaderboard");
 const Nav = document.querySelector("#nav");
 Nav.style.display = "none"
 // Initialise firebase firestore database
-const db = getFirestore(app);
+const db = getFirestore(app);git 
 
 // Initialise firebase Auth 
 const auth = getAuth(app);
