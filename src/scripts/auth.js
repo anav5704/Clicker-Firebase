@@ -4,7 +4,8 @@ import { getFirestore, collection, onSnapshot, setDoc, doc, getDoc, updateDoc, o
 import { app } from "../firebase/client";
 
 // const UserDetails = document.querySelector(".user");
-const Error = document.querySelector("#error");
+const ErrorSignin = document.querySelector("#errorSi");
+const ErrorLogin = document.querySelector("#errorLo");
 const Game = document.querySelector("#game");
 const Form = document.querySelector("#form");
 const Store = document.getElementById("store");
@@ -163,8 +164,8 @@ async function signup() {
     }
         
     catch(err) {
-        Error.style.display = "block"
-        Error.innerHTML = `<p>${err.message}</p>`
+        ErrorSignin.style.display = "block"
+        ErrorSignin.innerHTML = `<p>${err.message}</p>`
     }
 }
 
@@ -186,8 +187,8 @@ async function login() {
         loginForm.reset();            
     }
     catch(err){
-        Error.style.display = "block"
-        Error.innerHTML = `<p>${err.message}</p>`
+        ErrorLogin.style.display = "block"
+        ErrorLogin.innerHTML = `<p>${err.message}</p>`
     }
 } 
 
