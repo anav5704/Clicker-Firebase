@@ -1,6 +1,6 @@
 # Clicker Game 👇
 
-![hero](https://github/anav5704/Cliker-Firebase/blob/main/docs/clicker-firebase.png)
+![hero](https://github.com/anav5704/Clicker-Firebase/blob/main/docs/clicker-firebase.png)
 
 This is a simple button clicker game made using Firebase real-time. Users can login/register using Firebase auth and then click to earn points and upgrade to better buttons. There is also a real-time leaderboards that update when users save their scores.
 
@@ -16,14 +16,13 @@ First fork and clone the repo. First run ```npm install``` to download all the d
 
 ```
 const firebaseConfig = {
-apiKey: "___",
+        apiKey: "___",
         authDomain: "___",
         projectId: "___",
         storageBucket: "___",
         messagingSenderId: "___",
         appId: "___"
 };
-
 ```
 
 Once that is done, run ```npm start``` to view it on localhost.
