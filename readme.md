@@ -2,7 +2,7 @@
 
 ![hero](https://github.com/anav5704/Clicker-Firebase/blob/main/docs/clicker-firebase.png)
 
-This is a simple button clicker game made using Firebase real-time. Users can login/register using Firebase auth and then click to earn points and upgrade to better buttons. There is also a real-time leaderboards that update when users save their scores.
+This is a simple button clicker game made using Firebase real-time. Users can login/register using Firebase auth and then click to earn points and upgrade to better buttons. There is also a real-time leaderboards that update when users save their scores. Also pleae don't use Firebase. It's okay if you want to give it a try but trust me [Supabase](https://supabase.com) is way better in every way - and it's open source.
 
 ## Technologies Used
 
